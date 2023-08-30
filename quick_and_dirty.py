@@ -5,11 +5,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
 import csv
 
+target_xpath = "/html/body/center/form/table/tbody/tr[8]/td/table/tbody/tr[5]/td"
+
 data = [
     ["Pruefungstermin", "Ergebnis bundesweit", "Ergebnis NRW", "Ergebnis Koeln"]
 ]
-
-target_xpath = "/html/body/center/form/table/tbody/tr[8]/td/table/tbody/tr[5]/td"
 
 query_parameter = (
   'Fachinformatiker/-in Fachrichtung: Anwendungsentwicklung',
@@ -23,6 +23,7 @@ driver = webdriver.Firefox()
 driver.get("https://pes.ihk.de/")
 
 season_values = Select(driver.find_element(by=By.NAME , value="termin"))
+
 for item in season_values.options:
   season_list.append(item.text)
   
@@ -52,8 +53,8 @@ def grab_data(current_season):
   WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, target_xpath)))
     
   matches = driver.find_elements(by = By.XPATH, value = target_xpath)
-      
-  only_data_matches = matches [1:]
+  only_data_matches = matches [1
+    
   for values in only_data_matches:
     cleaned_value = values.text.replace(",", ".").replace(" %", "")
     data_row.append(float(cleaned_value))
@@ -61,8 +62,6 @@ def grab_data(current_season):
   driver.quit()
   return data_row
     
-
-
 for i in range(5):                    # Testlauf - kurz
 # for i in range(len(season_list)):   # echter Durchlauf - lang
   row = grab_data(season_list[i])
