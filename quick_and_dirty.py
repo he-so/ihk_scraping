@@ -53,7 +53,7 @@ def grab_data(current_season):
   WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH, target_xpath)))
     
   matches = driver.find_elements(by = By.XPATH, value = target_xpath)
-  only_data_matches = matches [1
+  only_data_matches = matches [1:]
     
   for values in only_data_matches:
     cleaned_value = values.text.replace(",", ".").replace(" %", "")
