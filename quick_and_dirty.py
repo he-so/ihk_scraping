@@ -57,7 +57,8 @@ def grab_data(current_season):
     
   for values in only_data_matches:
     cleaned_value = values.text.replace(",", ".").replace(" %", "")
-    data_row.append(float(cleaned_value))
+    if(len(cleaned_value)>0):
+      data_row.append(float(cleaned_value))
   
   driver.quit()
   return data_row
